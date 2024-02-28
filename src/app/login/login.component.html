@@ -1,0 +1,41 @@
+<div class="login-form-container">
+    <div class="form-wrapper">
+        <div class="login-form">
+            <div class="logo-container">
+                <img src="../assets/logos/tamtemLogo.png" width="128" height="128" alt="logo">
+            </div>
+            <form (ngSubmit)="login()" name="loginForm" [formGroup]="loginForm" >
+                <div class="form-input">
+                    <div class="form-control">
+                        <input type="email" id="email" name="email" formControlName="email" required>
+                        <label class="input-placeholder" for="email"> Email</label>
+                    </div>
+                    <span class="form-validation form-input-error" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.dirty">
+                        Invaild email
+                    </span>
+                </div>
+                <div class="form-input">
+                    <div class="form-control">
+                        <input type="password" id="password" name="password" pattern="^(?=.*[A-Z])[A-Za-z\d@$!%*#?&]{8,}$" formControlName="password" required>
+                        <label class="input-placeholder" for="password"> Password </label>
+                    </div>
+                    <div class="form-validation input-errors" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.dirty">
+                        <span class="form-input-error">
+                            Invaild password
+                        </span>
+                        <span class="form-input-error">
+                            <ul>
+                                <li *ngIf="loginForm.get('password')?.errors?.['minlength']">Should be at least 8 characters</li>
+                                <li *ngIf="loginForm.get('password')?.errors?.['pattern']">Should have at least 1 uppercase character</li>
+                            </ul>
+                        </span>
+                    </div>
+        
+                </div>
+                <div class="actions">
+                    <button class="submit" [disabled]="loginForm.invalid" type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

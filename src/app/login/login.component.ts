@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -39,6 +39,12 @@ export class LoginComponent implements OnInit {
 
   resetFrom() {
     this.loginForm.reset()
+    let control: AbstractControl;
+
+    Object.keys(this.loginForm.controls).forEach((name) => {
+      control = this.loginForm.controls[name];
+      control.setErrors(null);
+    });
   }
 
 }
